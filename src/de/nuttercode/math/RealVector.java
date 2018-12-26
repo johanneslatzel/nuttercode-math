@@ -9,7 +9,7 @@ import de.nuttercode.util.assurance.NotNull;
 /**
  * wraps around a double[] to provide
  * 
- * @author johannes
+ * @author Johannes B. Latzel
  *
  */
 public class RealVector {
@@ -153,6 +153,28 @@ public class RealVector {
 	 */
 	public void addValue(int source, int destination, double scalar) {
 		setValue(getValue(destination) + getValue(source) * scalar, destination);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(values);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RealVector other = (RealVector) obj;
+		if (!Arrays.equals(values, other.values))
+			return false;
+		return true;
 	}
 
 	@Override
