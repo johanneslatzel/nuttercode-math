@@ -6,12 +6,12 @@ import de.nuttercode.util.assurance.NotNull;
 import de.nuttercode.util.assurance.Positive;
 
 /**
- * implementation of {@link RealMatrix} with double arrays of fixed size.
+ * implementation of {@link DoubleMatrix} with double arrays of fixed size.
  * 
  * @author Johannes B. Latzel
  *
  */
-public class FullRealMatrix implements RealMatrix, FullMatrix {
+public class FullDoubleMatrix implements DoubleMatrix, FullMatrix {
 
 	/**
 	 * array representation of the matrix
@@ -24,7 +24,7 @@ public class FullRealMatrix implements RealMatrix, FullMatrix {
 	 * @param rowCount
 	 * @param columnCount
 	 */
-	public FullRealMatrix(@Positive int rowCount, @Positive int columnCount) {
+	public FullDoubleMatrix(@Positive int rowCount, @Positive int columnCount) {
 		Assurance.assurePositive(rowCount);
 		Assurance.assurePositive(columnCount);
 		values = new double[rowCount][columnCount];
@@ -35,7 +35,7 @@ public class FullRealMatrix implements RealMatrix, FullMatrix {
 	 * 
 	 * @param size
 	 */
-	public FullRealMatrix(@Positive int size) {
+	public FullDoubleMatrix(@Positive int size) {
 		this(size, size);
 	}
 
@@ -44,7 +44,7 @@ public class FullRealMatrix implements RealMatrix, FullMatrix {
 	 * 
 	 * @param matrix
 	 */
-	public FullRealMatrix(@NotNull FullRealMatrix matrix) {
+	public FullDoubleMatrix(@NotNull FullDoubleMatrix matrix) {
 		this(Assurance.assureNotNull(matrix).getRowCount(), matrix.getColumnCount());
 		int rows = getRowCount();
 		int cols = getColumnCount();
@@ -62,7 +62,7 @@ public class FullRealMatrix implements RealMatrix, FullMatrix {
 	 * 
 	 * @param array
 	 */
-	public FullRealMatrix(@NotNull double[][] array) {
+	public FullDoubleMatrix(@NotNull double[][] array) {
 		this(Assurance.assureNotNull(array).length, Assurance.assureNotNull(array[0]).length);
 		ArrayUtil.copy(array, values);
 	}
@@ -105,13 +105,13 @@ public class FullRealMatrix implements RealMatrix, FullMatrix {
 	}
 
 	/**
-	 * invokes {@link RealMatrixVisitor#visit(int, int, double)} for each entry
+	 * invokes {@link DoubleMatrixVisitor#visit(int, int, double)} for each entry
 	 * in this matrix.
 	 * 
-	 * @see RealMatrix#forEach(RealMatrixVisitor)
+	 * @see DoubleMatrix#forEach(DoubleMatrixVisitor)
 	 */
 	@Override
-	public void forEach(RealMatrixVisitor consumer) {
+	public void forEach(DoubleMatrixVisitor consumer) {
 		for (int i = 0; i < values.length; i++) {
 			for (int j = 0; j < values[i].length; j++) {
 				consumer.visit(i, j, getValue(i, j));

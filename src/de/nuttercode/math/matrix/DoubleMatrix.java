@@ -1,18 +1,18 @@
 package de.nuttercode.math.matrix;
 
-import de.nuttercode.math.matrix.RealMatrixVisitor;
+import de.nuttercode.math.matrix.DoubleMatrixVisitor;
 
 /**
  * 
  * represents a matrix M = \((a_{i,j})_{i,j}\) with \(a_{i,j} \in \mathbb{R}, i
  * \in I, j \in J, and I, J \subset \mathbb{N}\)
  * 
- * @see FullRealMatrix
- * @see SparseRealMatrix
+ * @see FullDoubleMatrix
+ * @see SparseDoubleMatrix
  * @author Johannes B. Latzel
  *
  */
-public interface RealMatrix {
+public interface DoubleMatrix {
 
 	/**
 	 * sets a_{i, j} = value
@@ -37,9 +37,9 @@ public interface RealMatrix {
 	void reset();
 
 	/**
-	 * invokes {@link RealMatrixVisitor#visit(int, int, double)} for a subset of
+	 * invokes {@link DoubleMatrixVisitor#visit(int, int, double)} for a subset of
 	 * \(I \times J\). the actual behavior depends on the implementation.
 	 */
-	void forEach(RealMatrixVisitor consumer);
+	void forEach(DoubleMatrixVisitor consumer);
 
 }

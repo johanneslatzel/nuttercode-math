@@ -3,19 +3,19 @@ package de.nuttercode.math.matrix;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.nuttercode.math.matrix.RealMatrixVisitor;
+import de.nuttercode.math.matrix.DoubleMatrixVisitor;
 import de.nuttercode.util.IntPair;
 import de.nuttercode.util.Pair;
 
 /**
- * implementation of {@link RealMatrix}. every index not already added by
+ * implementation of {@link DoubleMatrix}. every index not already added by
  * {@link #setValue(double, int, int)} will be considered to have
  * {@link #defaultValue} as its value.
  * 
  * @author Johannes B. Latzel
  *
  */
-public class SparseRealMatrix implements RealMatrix {
+public class SparseDoubleMatrix implements DoubleMatrix {
 
 	/**
 	 * default value used for unknown indices
@@ -31,16 +31,16 @@ public class SparseRealMatrix implements RealMatrix {
 	 * exactly as if {@link #SparseRealMatrix(double) new SparseRealMatrix(0)} was
 	 * called
 	 */
-	public SparseRealMatrix() {
+	public SparseDoubleMatrix() {
 		this(0);
 	}
 
 	/**
-	 * creates a new {@link SparseRealMatrix} with default value defaultValue
+	 * creates a new {@link SparseDoubleMatrix} with default value defaultValue
 	 * 
 	 * @param defaultValue default value
 	 */
-	public SparseRealMatrix(double defaultValue) {
+	public SparseDoubleMatrix(double defaultValue) {
 		this.defaultValue = defaultValue;
 		values = new HashMap<>();
 	}
@@ -64,7 +64,7 @@ public class SparseRealMatrix implements RealMatrix {
 	}
 
 	@Override
-	public void forEach(RealMatrixVisitor consumer) {
+	public void forEach(DoubleMatrixVisitor consumer) {
 		for (IntPair pair : values.keySet())
 			consumer.visit(pair.getI(), pair.getJ(), values.get(pair));
 	}

@@ -110,7 +110,7 @@ public class FullRationalNumberMatrix implements NumberMatrix<RationalNumber>, F
 	 * invokes {@link NumberMatrixVisitor#visit(int, int, RationalNumber)} for
 	 * each entry in this matrix.
 	 * 
-	 * @see RealMatrix#forEach(NumberMatrixVisitor)
+	 * @see DoubleMatrix#forEach(NumberMatrixVisitor)
 	 */
 	@Override
 	public void forEach(NumberMatrixVisitor<RationalNumber> consumer) {
