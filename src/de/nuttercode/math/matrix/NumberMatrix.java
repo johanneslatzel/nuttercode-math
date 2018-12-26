@@ -34,9 +34,9 @@ public interface NumberMatrix<T extends Number> {
 	void reset();
 
 	/**
-	 * invokes {@link NumberMatrixConsumer#consume(int, int, T)} for a subset of \(I
+	 * invokes {@link NumberMatrixVisitor#visit(int, int, T)} for a subset of \(I
 	 * \times J\). the actual behavior depends on the implementation.
 	 */
-	void forEach(NumberMatrixConsumer<T> consumer);
+	void forEach(NumberMatrixVisitor<T> consumer);
 
 }

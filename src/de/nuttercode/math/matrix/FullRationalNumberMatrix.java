@@ -107,16 +107,16 @@ public class FullRationalNumberMatrix implements NumberMatrix<RationalNumber>, F
 	}
 
 	/**
-	 * invokes {@link NumberMatrixConsumer#consume(int, int, RationalNumber)} for
+	 * invokes {@link NumberMatrixVisitor#visit(int, int, RationalNumber)} for
 	 * each entry in this matrix.
 	 * 
-	 * @see RealMatrix#forEach(NumberMatrixConsumer)
+	 * @see RealMatrix#forEach(NumberMatrixVisitor)
 	 */
 	@Override
-	public void forEach(NumberMatrixConsumer<RationalNumber> consumer) {
+	public void forEach(NumberMatrixVisitor<RationalNumber> consumer) {
 		for (int i = 0; i < values.length; i++) {
 			for (int j = 0; j < values[i].length; j++) {
-				consumer.consume(i, j, getValue(i, j));
+				consumer.visit(i, j, getValue(i, j));
 			}
 		}
 	}

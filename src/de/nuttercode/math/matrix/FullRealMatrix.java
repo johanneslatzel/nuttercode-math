@@ -105,16 +105,16 @@ public class FullRealMatrix implements RealMatrix, FullMatrix {
 	}
 
 	/**
-	 * invokes {@link RealMatrixConsumer#consume(int, int, double)} for each entry
+	 * invokes {@link RealMatrixVisitor#visit(int, int, double)} for each entry
 	 * in this matrix.
 	 * 
-	 * @see RealMatrix#forEach(RealMatrixConsumer)
+	 * @see RealMatrix#forEach(RealMatrixVisitor)
 	 */
 	@Override
-	public void forEach(RealMatrixConsumer consumer) {
+	public void forEach(RealMatrixVisitor consumer) {
 		for (int i = 0; i < values.length; i++) {
 			for (int j = 0; j < values[i].length; j++) {
-				consumer.consume(i, j, getValue(i, j));
+				consumer.visit(i, j, getValue(i, j));
 			}
 		}
 	}
