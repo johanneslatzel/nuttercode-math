@@ -12,7 +12,7 @@ import de.nuttercode.math.matrix.DoubleMatrixVisitor;
  * @author Johannes B. Latzel
  *
  */
-public interface DoubleMatrix {
+public interface DoubleMatrix extends Matrix {
 
 	/**
 	 * sets a_{i, j} = value
@@ -29,12 +29,6 @@ public interface DoubleMatrix {
 	 * @return a_{i, j}
 	 */
 	double getValue(int i, int j);
-
-	/**
-	 * sets all values to their default value. the actual behavior depends on the
-	 * implementation.
-	 */
-	void reset();
 
 	/**
 	 * invokes {@link DoubleMatrixVisitor#visit(int, int, double)} for a subset of

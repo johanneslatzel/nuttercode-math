@@ -1,14 +1,12 @@
 package de.nuttercode.math.matrix;
 
-/**
- * 
- * common interface of full matrices. those are matrix-implementations which use
- * arrays to save all values.
- * 
- * @author Johannes B. Latzel
- *
- */
-public interface FullMatrix {
+public interface Matrix {
+
+	/**
+	 * sets all values to their default value. the actual behavior depends on the
+	 * implementation.
+	 */
+	void reset();
 
 	/**
 	 * @return number of rows

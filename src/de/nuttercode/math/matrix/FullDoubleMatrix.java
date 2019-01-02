@@ -11,7 +11,7 @@ import de.nuttercode.util.assurance.Positive;
  * @author Johannes B. Latzel
  *
  */
-public class FullDoubleMatrix implements DoubleMatrix, FullMatrix {
+public class FullDoubleMatrix implements DoubleMatrix {
 
 	/**
 	 * array representation of the matrix
@@ -169,7 +169,7 @@ public class FullDoubleMatrix implements DoubleMatrix, FullMatrix {
 
 	@Override
 	public int getColumnCount() {
-		return values.length;
+		return values[0].length;
 	}
 
 }

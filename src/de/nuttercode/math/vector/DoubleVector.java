@@ -1,4 +1,4 @@
-package de.nuttercode.math;
+package de.nuttercode.math.vector;
 
 import java.util.Arrays;
 
@@ -12,7 +12,7 @@ import de.nuttercode.util.assurance.NotNull;
  * @author Johannes B. Latzel
  *
  */
-public class RealVector {
+public class DoubleVector implements Vector {
 
 	/**
 	 * underlying array
@@ -24,7 +24,7 @@ public class RealVector {
 	 * 
 	 * @param dimension
 	 */
-	public RealVector(int dimension) {
+	public DoubleVector(int dimension) {
 		values = new double[dimension];
 	}
 
@@ -33,7 +33,7 @@ public class RealVector {
 	 * 
 	 * @param vector
 	 */
-	public RealVector(@NotNull RealVector vector) {
+	public DoubleVector(@NotNull DoubleVector vector) {
 		this(Assurance.assureNotNull(vector).values);
 	}
 
@@ -43,7 +43,7 @@ public class RealVector {
 	 * 
 	 * @param array
 	 */
-	public RealVector(double[] array) {
+	public DoubleVector(double[] array) {
 		values = Arrays.copyOf(array, array.length);
 	}
 
@@ -52,7 +52,7 @@ public class RealVector {
 	 * @throws IllegalArgumentException if vector == null or if
 	 *                                  vector.getDimension() != getDimension()
 	 */
-	private void assureSameDimension(@NotNull RealVector vector) {
+	private void assureSameDimension(@NotNull DoubleVector vector) {
 		Assurance.assureNotNull(vector);
 		if (vector.getDimension() != getDimension())
 			throw new IllegalArgumentException(
@@ -121,7 +121,7 @@ public class RealVector {
 	 * @throws IllegalArgumentException if vector == null or if
 	 *                                  vector.getDimension() != getDimension()
 	 */
-	public void add(@NotNull RealVector vector) {
+	public void add(@NotNull DoubleVector vector) {
 		assureSameDimension(vector);
 		for (int i = 0; i < values.length; i++) {
 			setValue(getValue(i) + vector.getValue(i), i);
@@ -134,7 +134,7 @@ public class RealVector {
 	 * @throws IllegalArgumentException if vector == null or if
 	 *                                  vector.getDimension() != getDimension()
 	 */
-	public double scalarProduct(@NotNull RealVector vector) {
+	public double scalarProduct(@NotNull DoubleVector vector) {
 		assureSameDimension(vector);
 		double value = 0;
 		for (int i = 0; i < values.length; i++) {
@@ -171,7 +171,7 @@ public class RealVector {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RealVector other = (RealVector) obj;
+		DoubleVector other = (DoubleVector) obj;
 		if (!Arrays.equals(values, other.values))
 			return false;
 		return true;
@@ -179,7 +179,7 @@ public class RealVector {
 
 	@Override
 	public String toString() {
-		return "RealVector [values=" + Arrays.toString(values) + "]";
+		return Arrays.toString(values);
 	}
 
 }
