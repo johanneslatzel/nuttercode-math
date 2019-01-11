@@ -1,7 +1,7 @@
 package de.nuttercode.math.matrix;
 
 /**
- * used to consume entries of a {@link DoubleMatrix}
+ * used to visit entries of a {@link DoubleMatrix}
  * 
  * @author Johannes B. Latzel
  * @see #visit(int, int, double)
