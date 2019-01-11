@@ -1,6 +1,8 @@
 package de.nuttercode.math.vector;
 
+import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Random;
 
 import de.nuttercode.util.ArrayUtil;
 import de.nuttercode.util.assurance.Assurance;
@@ -12,7 +14,9 @@ import de.nuttercode.util.assurance.NotNull;
  * @author Johannes B. Latzel
  *
  */
-public class DoubleVector implements Vector {
+public class DoubleVector implements Vector, Serializable {
+
+	private static final long serialVersionUID = 7281625750036740535L;
 
 	/**
 	 * underlying array
@@ -153,6 +157,46 @@ public class DoubleVector implements Vector {
 	 */
 	public void addValue(int source, int destination, double scalar) {
 		setValue(getValue(destination) + getValue(source) * scalar, destination);
+	}
+
+	/**
+	 * @return index with the highest value in this vector
+	 * @throws IllegalArgumentException if and only if getDimension() is not
+	 *                                  positive
+	 */
+	public int getMaxIndex() {
+		int dimension = getDimension();
+		Assurance.assurePositive(dimension);
+		int maxIndex = 0;
+		double maxValue = getValue(0);
+		double current;
+		for (int a = 1; a < dimension; a++) {
+			current = getValue(a);
+			if (current > maxValue) {
+				maxValue = current;
+				maxIndex = a;
+			}
+		}
+		return maxIndex;
+	}
+
+	/**
+	 * @param visitor a visitor
+	 */
+	public void forEach(DoubleVectorVisitor visitor) {
+		int dimension = getDimension();
+		for (int i = 0; i < dimension; i++) {
+			visitor.visit(i, getValue(i));
+		}
+	}
+
+	/**
+	 * sets this vectors components to random values of [-0.5, 0.5)
+	 * 
+	 * @param random
+	 */
+	public void randomize(Random random) {
+		forEach((i, v) -> setValue(random.nextDouble() - 0.5, i));
 	}
 
 	@Override
