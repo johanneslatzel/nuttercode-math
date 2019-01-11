@@ -1,6 +1,8 @@
 package de.nuttercode.math.matrix;
 
 import de.nuttercode.math.matrix.DoubleMatrixVisitor;
+import de.nuttercode.math.vector.DoubleVector;
+import de.nuttercode.util.assurance.Assurance;
 
 /**
  * 
@@ -35,5 +37,30 @@ public interface DoubleMatrix extends Matrix {
 	 * \(I \times J\). the actual behavior depends on the implementation.
 	 */
 	void forEach(DoubleMatrixVisitor consumer);
+
+	/**
+	 * multiplies this matrix with the given vector
+	 * 
+	 * @param layerInput
+	 * @return result of the multiplication
+	 * @throws IllegalArugmentException if vector is null or vector.getDimension()
+	 *                                  != getColumnCount()
+	 */
+	default DoubleVector multiply(DoubleVector vector) {
+		int rows;
+		int columns = getColumnCount();
+		Assurance.assureEquals(getColumnCount(), Assurance.assureNotNull(vector).getDimension());
+		rows = getRowCount();
+		DoubleVector result = new DoubleVector(rows);
+		double value;
+		for (int j = 0; j < rows; j++) {
+			value = 0;
+			for (int i = 0; i < columns; i++) {
+				value += getValue(j, i) * vector.getValue(i);
+			}
+			result.setValue(value, j);
+		}
+		return result;
+	}
 
 }
