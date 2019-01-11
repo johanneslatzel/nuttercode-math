@@ -1,5 +1,8 @@
 package de.nuttercode.math.matrix;
 
+import java.io.Serializable;
+import java.util.Random;
+
 import de.nuttercode.util.ArrayUtil;
 import de.nuttercode.util.assurance.Assurance;
 import de.nuttercode.util.assurance.NotNull;
@@ -11,7 +14,9 @@ import de.nuttercode.util.assurance.Positive;
  * @author Johannes B. Latzel
  *
  */
-public class FullDoubleMatrix implements DoubleMatrix {
+public class FullDoubleMatrix implements DoubleMatrix, Serializable {
+
+	private static final long serialVersionUID = 4791467477622750766L;
 
 	/**
 	 * array representation of the matrix
@@ -105,8 +110,17 @@ public class FullDoubleMatrix implements DoubleMatrix {
 	}
 
 	/**
-	 * invokes {@link DoubleMatrixVisitor#visit(int, int, double)} for each entry
-	 * in this matrix.
+	 * sets this matrix components to random values of [-0.5, 0.5)
+	 * 
+	 * @param random
+	 */
+	public void randomize(@NotNull Random random) {
+		forEach((i, j, v) -> setValue(random.nextDouble() - 0.5, i, j));
+	}
+
+	/**
+	 * invokes {@link DoubleMatrixVisitor#visit(int, int, double)} for each entry in
+	 * this matrix.
 	 * 
 	 * @see DoubleMatrix#forEach(DoubleMatrixVisitor)
 	 */
